@@ -19,5 +19,5 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y gdb xvfb
-        python3 --version
+        python3 Tools/ssl/multissltests.py --steps=library --base-directory ${HOME}/multissl --openssl ${OPENSSL} >/dev/null 2>&1
         openssl version
