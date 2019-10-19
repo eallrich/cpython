@@ -27,3 +27,7 @@ jobs:
         make -j4 regen-all
         make -j4
         make pythoninfo
+    - name: Run script
+      run: |
+        make smelly
+        xvfb-run make buildbottest TESTOPTS="-j4 -uall,-cpu"
