@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y gdb openssl readline xvfb
+        sudo apt-get install -y gdb openssl xvfb
         openssl version
         python3 --version
     - name: Run before_script
