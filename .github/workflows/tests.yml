@@ -11,14 +11,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-16.04]
+        os: [ubuntu-16.04, ubuntu-18.04]
 
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y gdb xvfb openssl
+        sudo apt-get install -y gdb openssl readline xvfb
         openssl version
         python3 --version
     - name: Run before_script
