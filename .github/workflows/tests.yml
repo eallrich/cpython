@@ -18,15 +18,12 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y gdb xvfb
-    - name: Install OpenSSL
-      env:
-        OPENSSL: 1.1.1d
-        OPENSSL_DIR: "$HOME/multissl/openssl/${OPENSSL}"
-        PATH: "${OPENSSL_DIR}/bin:$PATH"
-        CFLAGS: "-I${OPENSSL_DIR}/include"
-        LDFLAGS: "-L${OPENSSL_DIR}/lib"
-        LD_RUN_PATH: "${OPENSSL_DIR}/lib"
-      run: |
-        python3 Tools/ssl/multissltests.py --steps=library --base-directory ${HOME}/multissl --openssl ${OPENSSL} >/dev/null 2>&1
+        sudo apt-get install -y gdb xvfb openssl
         openssl version
+        python3 --version
+    - name: Run before_script
+      run: |
+        CFLAGS="${CFLAGS} -Og" ./configure --with-pydebug
+        make -j4 regen-all
+        make -j4
+        make pythoninfo
